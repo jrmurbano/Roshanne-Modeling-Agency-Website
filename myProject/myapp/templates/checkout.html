@@ -34,21 +34,25 @@
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="name" class="form-label" style="font-weight: 500; letter-spacing: 1px;">NAME</label>
-                                    <input type="text" class="form-control" id="name" name="name" value="{{ customer.user.get_full_name }}" readonly style="border-radius: 0; padding: 12px;">
+                                    <label for="first_name" class="form-label" style="font-weight: 500; letter-spacing: 1px;">FIRST NAME</label>
+                                    <input type="text" class="form-control" id="first_name" name="first_name" value="{{ customer.user.first_name }}" required style="border-radius: 0; padding: 12px;">
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="email" class="form-label" style="font-weight: 500; letter-spacing: 1px;">EMAIL</label>
-                                    <input type="email" class="form-control" id="email" name="email" value="{{ customer.user.email }}" readonly style="border-radius: 0; padding: 12px;">
+                                    <label for="last_name" class="form-label" style="font-weight: 500; letter-spacing: 1px;">LAST NAME</label>
+                                    <input type="text" class="form-control" id="last_name" name="last_name" value="{{ customer.user.last_name }}" required style="border-radius: 0; padding: 12px;">
                                 </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label" style="font-weight: 500; letter-spacing: 1px;">EMAIL</label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ customer.user.email }}" required style="border-radius: 0; padding: 12px;">
                             </div>
                             <div class="mb-3">
                                 <label for="phone" class="form-label" style="font-weight: 500; letter-spacing: 1px;">PHONE</label>
                                 <input type="tel" class="form-control" id="phone" name="phone" value="{{ customer.phone }}" required style="border-radius: 0; padding: 12px;">
                             </div>
                             <div class="mb-3">
-                                <label for="address" class="form-label" style="font-weight: 500; letter-spacing: 1px;">ADDRESS</label>
-                                <textarea class="form-control" id="address" name="address" rows="3" required style="border-radius: 0; padding: 12px;">{{ customer.address }}</textarea>
+                                <label for="shipping_address" class="form-label" style="font-weight: 500; letter-spacing: 1px;">SHIPPING ADDRESS</label>
+                                <textarea class="form-control" id="shipping_address" name="shipping_address" rows="3" required style="border-radius: 0; padding: 12px;">{{ customer.address }}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="notes" class="form-label" style="font-weight: 500; letter-spacing: 1px;">ORDER NOTES (OPTIONAL)</label>
