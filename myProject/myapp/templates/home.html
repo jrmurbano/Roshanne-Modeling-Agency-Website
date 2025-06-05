@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Roshanne Modeling Agency{% endblock %}
+
+{% block content %}
+<section class="d-flex align-items-center text-center text-white" style="background-image: url('{% static 'images/hero1.jpeg' %}'); background-size: cover; background-position: center; height: 100vh; padding-top: 76px">
+    <div class="container">
+        <div>
+            <h1 style="font-size: 4.5rem; font-weight: 400; margin-bottom: 1rem; text-shadow: 2px 5px 5px rgba(0,0,0,0.7); letter-spacing: 8px;">ROSHANNE</h1>
+            <div style="height: 1px; background-color: #FFFFFF; width: 80px; margin: 2rem auto;"></div>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; font-weight: 500; letter-spacing: 2px; text-shadow: 2px 2px 5px #000000; color: #ffffff">MODELING AGENCY</p>
+            <a href="/models/" class="btn btn-lg me-4" style="background-color: #8E1616; border: none; color: white; font-weight: 600; padding: 15px 35px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; border-radius: 0; text-decoration: none;">DISCOVER MODELS</a>
+            <a href="/contact/" class="btn btn-outline-dark btn-lg" style="border: 2px solid rgb(0, 0, 0); color: rgb(0, 0, 0); font-weight: 600; padding: 13px 35px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; border-radius: 0; text-decoration: none;">GET IN TOUCH</a>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Models Preview -->
+<section class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <h2 class="text-center" style="font-size: 2.5rem; font-weight: 300; color: #000000; margin-bottom: 3rem; letter-spacing: 4px;">FEATURED MODELS</h2>
+        <div style="height: 1px; background-color: #8E1616; width: 80px; margin: 2rem auto;"></div>
+        <div class="row g-4 mt-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 h-100" style="transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.15)'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/model_anok.avif' %}" alt="Elite Model" class="card-img-top" style="height: 400px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body text-center p-4">
+                        <h5 class="card-title mb-1" style="font-weight: 600; letter-spacing: 1px;">ANOK YAI</h5>
+                        <p class="card-text text-muted mb-0" style="font-size: 0.9rem;">High Fashion • Editorial</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 h-100" style="transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.15)'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/model_bella.jpg' %}" alt="Elite Model" class="card-img-top" style="height: 400px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body text-center p-4">
+                        <h5 class="card-title mb-1" style="font-weight: 600; letter-spacing: 1px;">BELLA HADID</h5>
+                        <p class="card-text text-muted mb-0" style="font-size: 0.9rem;">Runway • High Fashion</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 h-100" style="transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.15)'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/model_kendall.webp' %}" alt="Elite Model" class="card-img-top" style="height: 400px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body text-center p-4">
+                        <h5 class="card-title mb-1" style="font-weight: 600; letter-spacing: 1px;">KENDALL JENNER</h5>
+                        <p class="card-text text-muted mb-0" style="font-size: 0.9rem;">Commercial • Beauty</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 h-100" style="transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.15)'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/model_imaan.jpg' %}" alt="Elite Model" class="card-img-top" style="height: 400px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body text-center p-4">
+                        <h5 class="card-title mb-1" style="font-weight: 600; letter-spacing: 1px;">IMAAN HAMMAN</h5>
+                        <p class="card-text text-muted mb-0" style="font-size: 0.9rem;">Editorial • Campaign</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-5">
+            <a href="/models/" class="btn btn-lg" style="background-color: transparent; border: 1px solid #8E1616; color: #8E1616; font-weight: 600; padding: 13px 35px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; border-radius: 0; text-decoration: none;">VIEW ALL MODELS</a>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center" style="font-size: 2.5rem; font-weight: 300; color: #000000; margin-bottom: 3rem; letter-spacing: 4px;">OUR SERVICES</h2>
+        <div style="height: 1px; background-color: #8E1616; width: 80px; margin: 2rem auto;"></div>
+        <div class="row g-4 mt-4">
+            <div class="col-md-4">
+                <div class="card border h-100 text-center p-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#8E1616'; this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.1)';" onmouseout="this.style.borderColor='#e0e0e0'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                    <i class="fas fa-camera mb-3" style="font-size: 3rem; color: #8E1616;"></i>
+                    <h4 class="mb-3" style="font-weight: 600; letter-spacing: 1px;">FASHION PHOTOGRAPHY</h4>
+                    <p>Fashion shoots with renowned photographers and creative directors for high-end publications.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border h-100 text-center p-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#8E1616'; this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.1)';" onmouseout="this.style.borderColor='#e0e0e0'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                    <i class="fas fa-walking mb-3" style="font-size: 3rem; color: #8E1616;"></i>
+                    <h4 class="mb-3" style="font-weight: 600; letter-spacing: 1px;">RUNWAY MODELING</h4>
+                    <p>International runway shows for luxury designers during Fashion Weeks in Paris, Milan, New York, and London.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border h-100 text-center p-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#8E1616'; this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.1)';" onmouseout="this.style.borderColor='#e0e0e0'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                    <i class="fas fa-star mb-3" style="font-size: 3rem; color: #8E1616;"></i>
+                    <h4 class="mb-3" style="font-weight: 600; letter-spacing: 1px;">LUXURY CAMPAIGNS</h4>
+                    <p>Exclusive advertising campaigns for the world's most luxurious fashion houses.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-5 text-white" style="background-color: #000000;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3">
+                <div style="font-size: 3.5rem; font-weight: 300; color: #8E1616; margin-bottom: 0.5rem;">50</div>
+                <p style="font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 500;">Supermodels</p>
+            </div>
+            <div class="col-md-3">
+                <div style="font-size: 3.5rem; font-weight: 300; color: #8E1616; margin-bottom: 0.5rem;">300+</div>
+                <p style="font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 500;">Luxury Campaigns</p>
+            </div>
+            <div class="col-md-3">
+                <div style="font-size: 3.5rem; font-weight: 300; color: #8E1616; margin-bottom: 0.5rem;">6</div>
+                <p style="font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 500;">Years Excellence</p>
+            </div>
+            <div class="col-md-3">
+                <div style="font-size: 3.5rem; font-weight: 300; color: #8E1616; margin-bottom: 0.5rem;">200+</div>
+                <p style="font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 500;">Fashion Shows</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Preview Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 style="font-size: 2.5rem; font-weight: 300; color: #000000; margin-bottom: 3rem; letter-spacing: 4px;">ABOUT ROSHANNE</h2>
+                <div style="height: 1px; background-color: #8E1616; width: 80px; margin-bottom: 2rem;"></div>
+                <p class="lead" style="font-weight: 300;">For over 6 years, ROSHANNE has been the definitive name in luxury modeling representation in the fashion industry.</p>
+                <p style="font-weight: 300;">We represent the world's most sought-after models, connecting them with the most luxurious brands and publications globally. Our commitment to excellence and eye for extraordinary beauty has made us the agency of choice for luxury fashion houses.</p>
+                <a href="/about/" class="btn" style="background-color: #8E1616; border: none; color: white; font-weight: 600; padding: 15px 35px; text-transform: uppercase; letter-spacing: 2px; border-radius: 0; text-decoration: none;">LEARN MORE</a>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'images/roshanne.jpg' %}" alt="About Roshanne" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

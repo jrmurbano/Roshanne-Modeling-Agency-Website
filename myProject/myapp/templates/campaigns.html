@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Campaigns - Roshanne Modeling Agency{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="d-flex align-items-center text-center text-white" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url({% static 'images/camp_tamburins.jpeg' %}) center/cover; height: 50vh;">
+    <div class="container">
+        <h1 style="font-size: 3.5rem; font-weight: 300; letter-spacing: 6px; margin-bottom: 1rem;">CAMPAIGNS</h1>
+        <div style="height: 1px; background-color: #FFFFFF; width: 80px; margin: 2rem auto;"></div>
+        <p class="lead" style="font-weight: 300; letter-spacing: 2px;">Luxury brand partnerships and collaborations</p>
+    </div>
+</section>
+
+<!-- Campaigns Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Campaign 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/camp_tamburins.jpeg' %}" alt="Luxury Fashion Campaign" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body p-4">
+                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">TAMBURINS</h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Perfumery</p>
+                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">International advertising campaign for a luxury perfumery based in Seoul, Korea.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Campaign 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/camp_tamburins.jpeg' %}" alt="Beauty Campaign" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body p-4">
+                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">PREMIUM BEAUTY BRAND</h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Beauty • Skincare Campaign</p>
+                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Sophisticated beauty campaign showcasing natural elegance and timeless beauty for a leading cosmetics brand.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Campaign 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/camp_tamburins.jpeg' %}" alt="Jewelry Campaign" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body p-4">
+                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">LUXURY JEWELRY COLLECTION</h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Jewelry • Luxury Campaign</p>
+                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Exquisite jewelry campaign highlighting the craftsmanship and elegance of fine luxury pieces and precious stones.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Campaign 4 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/camp_tamburins.jpeg' %}" alt="Fragrance Campaign" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body p-4">
+                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">SIGNATURE FRAGRANCE</h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Fragrance • Lifestyle Campaign</p>
+                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Sensual and sophisticated fragrance campaign capturing the essence of luxury and timeless elegance.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Campaign 5 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/camp_tamburins.jpeg' %}" alt="Luxury Accessories" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body p-4">
+                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">LUXURY ACCESSORIES</h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Accessories • Premium Campaign</p>
+                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Premium accessories campaign featuring handbags, shoes, and luxury goods from renowned fashion houses.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Campaign 6 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/camp_tamburins.jpeg' %}" alt="Lifestyle Campaign" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body p-4">
+                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">LIFESTYLE BRAND</h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Lifestyle • Brand Campaign</p>
+                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Comprehensive lifestyle brand campaign showcasing modern luxury living and contemporary fashion aesthetics.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Brand Partners Section -->
+<section class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <h2 class="text-center" style="font-size: 2.5rem; font-weight: 300; color: #000000; margin-bottom: 3rem; letter-spacing: 4px;">OUR BRAND PARTNERS</h2>
+        <div style="height: 1px; background-color: #8E1616; width: 80px; margin: 2rem auto;"></div>
+        <div class="row text-center mt-5">
+            <div class="col-md-2 col-6 mb-4">
+                <div style="font-size: 1.5rem; font-weight: 600; color: #8E1616; letter-spacing: 2px;">CHANEL</div>
+            </div>
+            <div class="col-md-2 col-6 mb-4">
+                <div style="font-size: 1.5rem; font-weight: 600; color: #8E1616; letter-spacing: 2px;">DIOR</div>
+            </div>
+            <div class="col-md-2 col-6 mb-4">
+                <div style="font-size: 1.5rem; font-weight: 600; color: #8E1616; letter-spacing: 2px;">VERSACE</div>
+            </div>
+            <div class="col-md-2 col-6 mb-4">
+                <div style="font-size: 1.5rem; font-weight: 600; color: #8E1616; letter-spacing: 2px;">GUCCI</div>
+            </div>
+            <div class="col-md-2 col-6 mb-4">
+                <div style="font-size: 1.5rem; font-weight: 600; color: #8E1616; letter-spacing: 2px;">PRADA</div>
+            </div>
+            <div class="col-md-2 col-6 mb-4">
+                <div style="font-size: 1.5rem; font-weight: 600; color: #8E1616; letter-spacing: 2px;">ARMANI</div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

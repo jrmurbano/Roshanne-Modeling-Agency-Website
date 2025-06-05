@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - Roshanne Modeling Agency{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="d-flex align-items-center text-center text-white" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3') center/cover; height: 50vh;">
+    <div class="container">
+        <h1 style="font-size: 3.5rem; font-weight: 300; letter-spacing: 6px; margin-bottom: 1rem;">ABOUT ROSHANNE</h1>
+        <div style="height: 1px; background-color: #FFFFFF; width: 80px; margin: 2rem auto;"></div>
+        <p class="lead" style="font-weight: 300; letter-spacing: 2px;">Excellence in modeling representation since 2019</p>
+    </div>
+</section>
+
+<!-- About Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="text-center" style="font-size: 2.5rem; font-weight: 300; color: #000000; margin-bottom: 3rem; letter-spacing: 4px;">OUR STORY</h2>
+                <div style="height: 1px; background-color: #8E1616; width: 80px; margin: 2rem auto;"></div>
+                <p class="lead" style="font-weight: 300;">Founded in 2019, Roshanne Modeling Agency has been a beacon of excellence in the fashion industry for over six years.</p>
+                
+                <p style="font-weight: 300;">What started as a small boutique agency with a vision for discovering unique talent has grown into one of the most respected modeling agencies in the industry. Our founder, Roshan Urbano, began with a simple philosophy: true beauty comes from authenticity, confidence, and the courage to be different.</p>
+                
+                <p style="font-weight: 300;">Over the years, we have represented hundreds of models who have graced the covers of international magazines, walked the runways of Paris, Milan, and New York, and starred in major advertising campaigns for luxury brands worldwide.</p>
+                
+                <p style="font-weight: 300;">Our success is built on three core principles: discovering exceptional talent, nurturing their growth, and creating opportunities that transform careers. We believe that every model we represent is not just a face, but a storyteller who brings brands to life.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values Section -->
+<section class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <h2 class="text-center" style="font-size: 2.5rem; font-weight: 300; color: #000000; margin-bottom: 3rem; letter-spacing: 4px;">OUR VALUES</h2>
+        <div style="height: 1px; background-color: #8E1616; width: 80px; margin: 2rem auto;"></div>
+        <div class="row g-4 mt-4">
+            <div class="col-md-4 text-center">
+                <i class="fas fa-star mb-4" style="font-size: 3rem; color: #8E1616;"></i>
+                <h4 style="font-weight: 600; letter-spacing: 1px;">EXCELLENCE</h4>
+                <p style="font-weight: 300;">We maintain the highest standards of professionalism and quality in all our services and representations.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="fas fa-users mb-4" style="font-size: 3rem; color: #8E1616;"></i>
+                <h4 style="font-weight: 600; letter-spacing: 1px;">DIVERSITY</h4>
+                <p style="font-weight: 300;">We celebrate and promote models of all backgrounds, challenging traditional beauty standards.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="fas fa-lightbulb mb-4" style="font-size: 3rem; color: #8E1616;"></i>
+                <h4 style="font-weight: 600; letter-spacing: 1px;">INNOVATION</h4>
+                <p style="font-weight: 300;">We embrace new technologies and trends to keep our models at the forefront of the industry.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Founder Section -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center" style="font-size: 2.5rem; font-weight: 300; color: #000000; margin-bottom: 3rem; letter-spacing: 4px;">FOUNDER</h2>
+        <div style="height: 1px; background-color: #8E1616; width: 80px; margin: 2rem auto;"></div>
+        <div class="row g-4 mt-4 justify-content-center">
+            <div class="col-md-4">
+                <div class="card border-0 h-100" style="transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.1)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/shany.jpg' %}" alt="Roshanne" class="card-img-top" style="height: 300px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body text-center p-4">
+                        <h5 style="font-weight: 600; letter-spacing: 1px;">ROSHANNE URBANO</h5>
+                        <p style="color: #8E1616; font-weight: 500;">Founder & CEO</p>
+                        <p style="font-weight: 300;">With over 8 years in the fashion industry, Roshanne brings unparalleled expertise and vision to the agency.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Information -->
+<section class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <h2 class="text-center" style="font-size: 2.5rem; font-weight: 300; color: #000000; margin-bottom: 3rem; letter-spacing: 4px;">CONTACT US</h2>
+        <div style="height: 1px; background-color: #8E1616; width: 80px; margin: 2rem auto;"></div>
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card border text-center h-100 p-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#8E1616'; this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.1)';" onmouseout="this.style.borderColor='#e0e0e0'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                    <i class="fas fa-map-marker-alt mb-4" style="font-size: 3rem; color: #8E1616;"></i>
+                    <h5 style="font-weight: 600; letter-spacing: 1px;">VISIT OUR OFFICE</h5>
+                    <p style="font-weight: 300;">73 Park Avenue<br>New York, NY<br>United States</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card border text-center h-100 p-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#8E1616'; this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.1)';" onmouseout="this.style.borderColor='#e0e0e0'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                    <i class="fas fa-phone mb-4" style="font-size: 3rem; color: #8E1616;"></i>
+                    <h5 style="font-weight: 600; letter-spacing: 1px;">CALL US</h5>
+                    <p style="font-weight: 300;">Main: +63 929 153 0238<br>Talent: +63 920 404 5549<br>Bookings: +63 918 337 0635</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card border text-center h-100 p-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#8E1616'; this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.1)';" onmouseout="this.style.borderColor='#e0e0e0'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                    <i class="fas fa-envelope mb-4" style="font-size: 3rem; color: #8E1616;"></i>
+                    <h5 style="font-weight: 600; letter-spacing: 1px;">EMAIL US</h5>
+                    <p style="font-weight: 300;">info@roshanne.com<br>talent@roshanne.com<br>bookings@roshanne.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Office Hours -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <h3 class="mb-4" style="font-weight: 300; letter-spacing: 3px;">OFFICE HOURS</h3>
+                <div style="height: 1px; background-color: #8E1616; width: 80px; margin: 2rem auto;"></div>
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <p style="font-weight: 500;">MONDAY - FRIDAY</p>
+                        <p style="font-weight: 300;">9:00 AM - 4:00 PM</p>
+                    </div>
+                    <div class="col-6">
+                        <p style="font-weight: 500;">SATURDAY</p>
+                        <p style="font-weight: 300;">10:00 AM - 4:00 PM</p>
+                    </div>
+                </div>
+                <p style="color: #666; font-weight: 300;">Closed on Sundays and major holidays</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

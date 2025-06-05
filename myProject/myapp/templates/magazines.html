@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Shop Magazines - Roshanne Modeling Agency{% endblock %}
+
+{% block content %}
+<section class="d-flex align-items-center text-center text-white" style="background: linear-gradient(#00000099, rgba(0,0,0,0.6)), url({% static 'images/hero2.jpeg' %}) center/cover; ;height: 50vh;">
+    <div class="container">
+        <h1 style="font-size: 3.5rem; font-weight: 300; letter-spacing: 6px; margin-bottom: 1rem;">SHOP MAGAZINES</h1>
+        <div style="height: 1px; background-color: #FFFFFF; width: 80px; margin: 2rem auto;"></div>
+        <p class="lead" style="font-weight: 300; letter-spacing: 2px;">Exclusive fashion magazines featuring our models</p>
+    </div>
+</section>
+
+<!-- Filter Section -->
+<section class="py-4" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h5 style="font-weight: 500; letter-spacing: 1px; margin-bottom: 0;">FILTER BY CATEGORY</h5>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex flex-wrap gap-2 justify-content-md-end">
+                    <button class="btn btn-sm" style="background-color: #8E1616; border: 1px solid #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; border-radius: 0;">ALL</button>
+                    <button class="btn btn-sm" style="background-color: transparent; border: 1px solid #8E1616; color: #8E1616; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; border-radius: 0;">FASHION</button>
+                    <button class="btn btn-sm" style="background-color: transparent; border: 1px solid #8E1616; color: #8E1616; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; border-radius: 0;">BEAUTY</button>
+                    <button class="btn btn-sm" style="background-color: transparent; border: 1px solid #8E1616; color: #8E1616; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; border-radius: 0;">LIFESTYLE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Magazines Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Magazine 1 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card border h-100" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/mag_ken.jpg' %}" alt="Vogue Magazine" class="card-img-top" style="height: 300px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body p-4">
+                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">POP MAGAZINE</h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Fashion • June 2023</p>
+                        <p style="font-size: 0.9rem; color: #666; font-weight: 300; margin-bottom: 1rem;">Featuring Kendall Jenner on the cover with exclusive fashion editorials.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span style="font-size: 1.2rem; font-weight: 600; color: #8E1616;">$25.00</span>
+                            <button class="btn btn-sm" style="background-color: #8E1616; border: none; color: white; font-weight: 500; padding: 8px 16px; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Magazine 2 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card border h-100" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/mag_brazilianmodel.jpg' %}" alt="Harper's Bazaar" class="card-img-top" style="height: 300px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body p-4">
+                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">V Magazine</h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Fashion • May 2024</p>
+                        <p style="font-size: 0.9rem; color: #666; font-weight: 300; margin-bottom: 1rem;">Featuring Marina Ruy Barbosa with luxury trends.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span style="font-size: 1.2rem; font-weight: 600; color: #8E1616;">$22.00</span>
+                            <button class="btn btn-sm" style="background-color: #8E1616; border: none; color: white; font-weight: 500; padding: 8px 16px; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Magazine 3 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card border h-100" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/mag_lisa.jpeg' %}" alt="Elle Magazine" class="card-img-top" style="height: 300px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body p-4">
+                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">VOGUE KOREA</h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Lifestyle • October 2024</p>
+                        <p style="font-size: 0.9rem; color: #666; font-weight: 300; margin-bottom: 1rem;">Featuring Lisa Manoban with lifestyle and fashion trends.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span style="font-size: 1.2rem; font-weight: 600; color: #8E1616;">$20.00</span>
+                            <button class="btn btn-sm" style="background-color: #8E1616; border: none; color: white; font-weight: 500; padding: 8px 16px; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Magazine 4 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card border h-100" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/mag_jnk.jpeg' %}" alt="Harper's Bazaar" class="card-img-top" style="height: 300px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body p-4">
+                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">HARPER'S BAZAAR</h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Fashion • October 2023</p>
+                        <p style="font-size: 0.9rem; color: #666; font-weight: 300; margin-bottom: 1rem;">Featuring Jennie Kim with high fashion editorials and trends.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span style="font-size: 1.2rem; font-weight: 600; color: #8E1616;">$23.00</span>
+                            <button class="btn btn-sm" style="background-color: #8E1616; border: none; color: white; font-weight: 500; padding: 8px 16px; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Magazine 5 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card border h-100" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/mag_bella.jpg' %}" alt="W Magazine" class="card-img-top" style="height: 300px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body p-4">
+                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">VOGUE ITALIA</h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Fashion • Fall 2019</p>
+                        <p style="font-size: 0.9rem; color: #666; font-weight: 300; margin-bottom: 1rem;">Exclusive editorial featuring our top models in avant-garde fashion.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span style="font-size: 1.2rem; font-weight: 600; color: #8E1616;">$28.00</span>
+                            <button class="btn btn-sm" style="background-color: #8E1616; border: none; color: white; font-weight: 500; padding: 8px 16px; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Magazine 6 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card border h-100" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/mag_z.jpg' %}" alt="Allure Magazine" class="card-img-top" style="height: 300px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body p-4">
+                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">V MAGAZINE</h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Lifestyle • July 2024</p>
+                        <p style="font-size: 0.9rem; color: #666; font-weight: 300; margin-bottom: 1rem;">Exclusive interview with Zendaya about her upcoming movie and fashion campaign.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span style="font-size: 1.2rem; font-weight: 600; color: #8E1616;">$21.00</span>
+                            <button class="btn btn-sm" style="background-color: #8E1616; border: none; color: white; font-weight: 500; padding: 8px 16px; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Magazine 7 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card border h-100" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/mag_anok.jpg' %}" alt="Glamour Magazine" class="card-img-top" style="height: 300px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body p-4">
+                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">VOGUE ITALIA</h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Lifestyle • August 2023</p>
+                        <p style="font-size: 0.9rem; color: #666; font-weight: 300; margin-bottom: 1rem;">Lifestyle and fashion guide featuring our models in everyday luxury with our model Anok Yai.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span style="font-size: 1.2rem; font-weight: 600; color: #8E1616;">$19.00</span>
+                            <button class="btn btn-sm" style="background-color: #8E1616; border: none; color: white; font-weight: 500; padding: 8px 16px; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Magazine 8 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card border h-100" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    <img src="{% static 'images/mag_vittoria.jpg' %}" alt="Vogue Magazine" class="card-img-top" style="height: 300px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    <div class="card-body p-4">
+                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">VOGUE PARIS</h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Beauty • September 2023</p>
+                        <p style="font-size: 0.9rem; color: #666; font-weight: 300; margin-bottom: 1rem;">Beauty secrets and fashion tips from our top model Vittoria Ceretti.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span style="font-size: 1.2rem; font-weight: 600; color: #8E1616;">$24.00</span>
+                            <button class="btn btn-sm" style="background-color: #8E1616; border: none; color: white; font-weight: 500; padding: 8px 16px; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

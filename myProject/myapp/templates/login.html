@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Roshanne Modeling Agency{% endblock %}
+
+{% block content %}
+<!-- Login Form Section -->
+<section class="py-5" style="min-height: calc(100vh - 76px - 400px);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <h2 class="text-center mb-4" style="font-weight: 300; letter-spacing: 2px;">LOGIN</h2>
+                        <div style="height: 1px; background-color: #8E1616; width: 80px; margin: 0 auto 2rem;"></div>
+                        
+                        {% if messages %}
+                        <div class="alert alert-danger">
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; font-weight: 500; letter-spacing: 1px;">LOGIN</button>
+                            </div>
+                        </form>
+                        <div class="text-center mt-4">
+                            <p>Don't have an account? <a href="/register/" style="color: #8E1616; text-decoration: none;">Register here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

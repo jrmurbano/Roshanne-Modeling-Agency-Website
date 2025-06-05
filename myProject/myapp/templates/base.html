@@ -1,0 +1,113 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Roshanne Modeling Agency{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="{% static 'images/roshanne.jpg' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body style="font-family: 'Inter', sans-serif; padding-top: 76px;">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #FFFFFF; border-bottom: 1px solid #e0e0e0; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/" style="font-weight: 700; font-size: 1.5rem; color: #000000; letter-spacing: 2px; text-decoration: none;">
+                <img src="{% static 'images/roshanne.jpg' %}" alt="Roshanne" width="45" height="45" class="me-3" style="object-fit: cover; border-radius: 50%;">
+                ROSHANNE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/" style="color: {% if request.path == '/' %}#8E1616{% else %}#000000{% endif %} !important; font-weight: 500; font-size: 0.9rem; letter-spacing: 1px;">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/magazines/' %}active{% endif %}" href="/magazines/" style="color: {% if request.path == '/magazines/' %}#8E1616{% else %}#000000{% endif %} !important; font-weight: 500; font-size: 0.9rem; letter-spacing: 1px;">SHOP MAGAZINES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/models/' %}active{% endif %}" href="/models/" style="color: {% if request.path == '/models/' %}#8E1616{% else %}#000000{% endif %} !important; font-weight: 500; font-size: 0.9rem; letter-spacing: 1px;">MODELS</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" style="color: #000000 !important; font-weight: 500; font-size: 0.9rem; letter-spacing: 1px;">
+                            PORTFOLIO
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/photoshoots/">Photoshoots</a></li>
+                            <li><a class="dropdown-item" href="/runways/">Runway Shows</a></li>
+                            <li><a class="dropdown-item" href="/campaigns/">Campaigns</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/about/' %}active{% endif %}" href="/about/" style="color: {% if request.path == '/about/' %}#8E1616{% else %}#000000{% endif %} !important; font-weight: 500; font-size: 0.9rem; letter-spacing: 1px;">ABOUT</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout/" style="color: #8E1616 !important; font-weight: 500; font-size: 0.9rem; letter-spacing: 1px;">LOGOUT</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/login/' %}active{% endif %}" href="/login/" style="color: {% if request.path == '/login/' %}#8E1616{% else %}#000000{% endif %} !important; font-weight: 500; font-size: 0.9rem; letter-spacing: 1px;">LOGIN</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/register/' %}active{% endif %}" href="/register/" style="color: {% if request.path == '/register/' %}#8E1616{% else %}#000000{% endif %} !important; font-weight: 500; font-size: 0.9rem; letter-spacing: 1px;">REGISTER</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item ms-2">
+                        <a class="nav-link position-relative" href="#" style="color: #8E1616 !important;">
+                            <i class="fas fa-shopping-bag" style="font-size: 1.2rem;"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" style="background-color: #8E1616;">
+                                0
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <!-- Footer -->
+    <footer class="text-white py-5" style="background-color: #000000;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="mb-4" style="font-weight: 600; letter-spacing: 1px;">ROSHANNE MODELING AGENCY</h5>
+                    <p style="font-weight: 300;">Representing the world's most sought-after models with uncompromising standards of excellence since 2019.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="mb-4" style="font-weight: 600; letter-spacing: 1px;">QUICK LINKS</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="/about/" class="text-light text-decoration-none" style="font-weight: 300;">About Us</a></li>
+                        <li class="mb-2"><a href="/models/" class="text-light text-decoration-none" style="font-weight: 300;">Our Models</a></li>
+                        <li class="mb-2"><a href="/magazines/" class="text-light text-decoration-none" style="font-weight: 300;">Shop Magazines</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="mb-4" style="font-weight: 600; letter-spacing: 1px;">FOLLOW US</h5>
+                    <div>
+                        <a href="#" style="color: #8E1616; font-size: 1.8rem; margin: 0 15px; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: #8E1616; font-size: 1.8rem; margin: 0 15px; text-decoration: none;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: #8E1616; font-size: 1.8rem; margin: 0 15px; text-decoration: none;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: #8E1616; font-size: 1.8rem; margin: 0 15px; text-decoration: none;"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: #333;">
+            <div class="text-center">
+                <p style="font-weight: 300;">&copy; 2019 Roshanne Modeling Agency. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html> 

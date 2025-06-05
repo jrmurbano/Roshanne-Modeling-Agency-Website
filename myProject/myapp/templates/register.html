@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - Roshanne Modeling Agency{% endblock %}
+
+{% block content %}
+<!-- Registration Form Section -->
+<section class="py-5" style="min-height: calc(100vh - 76px - 400px);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <h2 class="text-center mb-4" style="font-weight: 300; letter-spacing: 2px;">REGISTER</h2>
+                        <div style="height: 1px; background-color: #8E1616; width: 80px; margin: 0 auto 2rem;"></div>
+                        
+                        {% if messages %}
+                        <div class="alert alert-danger">
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password1" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password1" name="password1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password2" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="password2" name="password2" required>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; font-weight: 500; letter-spacing: 1px;">REGISTER</button>
+                            </div>
+                        </form>
+                        <div class="text-center mt-4">
+                            <p>Already have an account? <a href="/login/" style="color: #8E1616; text-decoration: none;">Login here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 
