@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Checkout - Roshanne Modeling Agency{% endblock %}
+
+{% block content %}
+<section class="d-flex align-items-center text-center text-white" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url({% static 'images/hero3.jpg' %}) center/cover; height: 50vh;">
+    <div class="container">
+        <h1 style="font-size: 3.5rem; font-weight: 300; letter-spacing: 6px; margin-bottom: 1rem;">CHECKOUT</h1>
+        <div style="height: 1px; background-color: #FFFFFF; width: 80px; margin: 2rem auto;"></div>
+        <p class="lead" style="font-weight: 300; letter-spacing: 2px;">Complete your purchase</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        {% if messages %}
+        <div class="messages mb-4">
+            {% for message in messages %}
+            <div class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <h3 class="mb-4" style="font-weight: 300; letter-spacing: 2px;">Shipping Information</h3>
+                        <form method="POST" action="{% url 'checkout' %}">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label" style="font-weight: 500; letter-spacing: 1px;">NAME</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ customer.user.get_full_name }}" readonly style="border-radius: 0; padding: 12px;">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label" style="font-weight: 500; letter-spacing: 1px;">EMAIL</label>
+                                    <input type="email" class="form-control" id="email" name="email" value="{{ customer.user.email }}" readonly style="border-radius: 0; padding: 12px;">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label" style="font-weight: 500; letter-spacing: 1px;">PHONE</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" value="{{ customer.phone }}" required style="border-radius: 0; padding: 12px;">
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label" style="font-weight: 500; letter-spacing: 1px;">ADDRESS</label>
+                                <textarea class="form-control" id="address" name="address" rows="3" required style="border-radius: 0; padding: 12px;">{{ customer.address }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="notes" class="form-label" style="font-weight: 500; letter-spacing: 1px;">ORDER NOTES (OPTIONAL)</label>
+                                <textarea class="form-control" id="notes" name="notes" rows="3" style="border-radius: 0; padding: 12px;"></textarea>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">PLACE ORDER</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="mb-4" style="font-weight: 300; letter-spacing: 2px;">Order Summary</h3>
+                        {% for item in bag_items %}
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h6 class="mb-0" style="font-weight: 500;">{{ item.name }}</h6>
+                                <small class="text-muted">Quantity: {{ item.quantity }}</small>
+                            </div>
+                            <span style="font-weight: 500;">${{ item.total_price }}</span>
+                        </div>
+                        {% endfor %}
+                        <div style="height: 1px; background-color: #dee2e6; margin: 1rem 0;"></div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span style="font-weight: 500;">Subtotal</span>
+                            <span style="font-weight: 500;">${{ total }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span style="font-weight: 500;">Shipping</span>
+                            <span style="font-weight: 500;">Free</span>
+                        </div>
+                        <div style="height: 1px; background-color: #dee2e6; margin: 1rem 0;"></div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span style="font-weight: 600;">Total</span>
+                            <span style="font-weight: 600; color: #8E1616;">${{ total }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

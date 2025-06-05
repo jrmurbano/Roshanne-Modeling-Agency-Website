@@ -25,6 +25,17 @@
                         <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">TAMBURINS</h5>
                         <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Perfumery</p>
                         <p style="font-size: 0.9rem; color: #666; font-weight: 300;">International advertising campaign for a luxury perfumery based in Seoul, Korea.</p>
+                        <p class="card-text" style="font-weight: 500;">${{ campaign.price }}</p>
+                        {% if user.is_authenticated %}
+                        <form method="POST" action="{% url 'add_to_bag' campaign.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="type" value="campaign">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -37,6 +48,17 @@
                         <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">PREMIUM BEAUTY BRAND</h5>
                         <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Beauty • Skincare Campaign</p>
                         <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Sophisticated beauty campaign showcasing natural elegance and timeless beauty for a leading cosmetics brand.</p>
+                        <p class="card-text" style="font-weight: 500;">${{ campaign.price }}</p>
+                        {% if user.is_authenticated %}
+                        <form method="POST" action="{% url 'add_to_bag' campaign.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="type" value="campaign">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -49,6 +71,17 @@
                         <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">LUXURY JEWELRY COLLECTION</h5>
                         <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Jewelry • Luxury Campaign</p>
                         <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Exquisite jewelry campaign highlighting the craftsmanship and elegance of fine luxury pieces and precious stones.</p>
+                        <p class="card-text" style="font-weight: 500;">${{ campaign.price }}</p>
+                        {% if user.is_authenticated %}
+                        <form method="POST" action="{% url 'add_to_bag' campaign.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="type" value="campaign">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -61,6 +94,17 @@
                         <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">SIGNATURE FRAGRANCE</h5>
                         <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Fragrance • Lifestyle Campaign</p>
                         <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Sensual and sophisticated fragrance campaign capturing the essence of luxury and timeless elegance.</p>
+                        <p class="card-text" style="font-weight: 500;">${{ campaign.price }}</p>
+                        {% if user.is_authenticated %}
+                        <form method="POST" action="{% url 'add_to_bag' campaign.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="type" value="campaign">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -73,6 +117,17 @@
                         <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">LUXURY ACCESSORIES</h5>
                         <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Accessories • Premium Campaign</p>
                         <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Premium accessories campaign featuring handbags, shoes, and luxury goods from renowned fashion houses.</p>
+                        <p class="card-text" style="font-weight: 500;">${{ campaign.price }}</p>
+                        {% if user.is_authenticated %}
+                        <form method="POST" action="{% url 'add_to_bag' campaign.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="type" value="campaign">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -85,6 +140,17 @@
                         <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">LIFESTYLE BRAND</h5>
                         <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Lifestyle • Brand Campaign</p>
                         <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Comprehensive lifestyle brand campaign showcasing modern luxury living and contemporary fashion aesthetics.</p>
+                        <p class="card-text" style="font-weight: 500;">${{ campaign.price }}</p>
+                        {% if user.is_authenticated %}
+                        <form method="POST" action="{% url 'add_to_bag' campaign.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="type" value="campaign">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

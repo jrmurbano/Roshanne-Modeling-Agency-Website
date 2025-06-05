@@ -1,50 +1,76 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Register - Roshanne Modeling Agency{% endblock %}
 
 {% block content %}
-<!-- Registration Form Section -->
-<section class="py-5" style="min-height: calc(100vh - 76px - 400px);">
+<section class="d-flex align-items-center text-center text-white" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url({% static 'images/hero5.jpg' %}) center/cover; height: 50vh;">
+    <div class="container">
+        <h1 style="font-size: 3.5rem; font-weight: 300; letter-spacing: 6px; margin-bottom: 1rem;">REGISTER</h1>
+        <div style="height: 1px; background-color: #FFFFFF; width: 80px; margin: 2rem auto;"></div>
+        <p class="lead" style="font-weight: 300; letter-spacing: 2px;">Join Roshanne Modeling Agency</p>
+    </div>
+</section>
+
+<section class="py-5">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-8">
+                {% if messages %}
+                <div class="messages mb-4">
+                    {% for message in messages %}
+                    <div class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
                 <div class="card border-0 shadow-sm">
                     <div class="card-body p-5">
-                        <h2 class="text-center mb-4" style="font-weight: 300; letter-spacing: 2px;">REGISTER</h2>
-                        <div style="height: 1px; background-color: #8E1616; width: 80px; margin: 0 auto 2rem;"></div>
-                        
-                        {% if messages %}
-                        <div class="alert alert-danger">
-                            {% for message in messages %}
-                                {{ message }}
-                            {% endfor %}
-                        </div>
-                        {% endif %}
-
-                        <form method="post">
+                        <form method="POST" action="{% url 'register' %}">
                             {% csrf_token %}
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label for="first_name" class="form-label" style="font-weight: 500; letter-spacing: 1px;">FIRST NAME</label>
+                                    <input type="text" class="form-control" id="first_name" name="first_name" required style="border-radius: 0; padding: 12px;">
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label for="last_name" class="form-label" style="font-weight: 500; letter-spacing: 1px;">LAST NAME</label>
+                                    <input type="text" class="form-control" id="last_name" name="last_name" required style="border-radius: 0; padding: 12px;">
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                            <div class="mb-4">
+                                <label for="username" class="form-label" style="font-weight: 500; letter-spacing: 1px;">USERNAME</label>
+                                <input type="text" class="form-control" id="username" name="username" required style="border-radius: 0; padding: 12px;">
                             </div>
-                            <div class="mb-3">
-                                <label for="password1" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password1" name="password1" required>
+                            <div class="mb-4">
+                                <label for="email" class="form-label" style="font-weight: 500; letter-spacing: 1px;">EMAIL</label>
+                                <input type="email" class="form-control" id="email" name="email" required style="border-radius: 0; padding: 12px;">
                             </div>
-                            <div class="mb-3">
-                                <label for="password2" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" id="password2" name="password2" required>
+                            <div class="mb-4">
+                                <label for="phone" class="form-label" style="font-weight: 500; letter-spacing: 1px;">PHONE</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" required style="border-radius: 0; padding: 12px;">
                             </div>
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; font-weight: 500; letter-spacing: 1px;">REGISTER</button>
+                            <div class="mb-4">
+                                <label for="address" class="form-label" style="font-weight: 500; letter-spacing: 1px;">ADDRESS</label>
+                                <textarea class="form-control" id="address" name="address" rows="3" required style="border-radius: 0; padding: 12px;"></textarea>
+                            </div>
+                            <div class="mb-4">
+                                <label for="password1" class="form-label" style="font-weight: 500; letter-spacing: 1px;">PASSWORD</label>
+                                <input type="password" class="form-control" id="password1" name="password1" required style="border-radius: 0; padding: 12px;">
+                            </div>
+                            <div class="mb-4">
+                                <label for="password2" class="form-label" style="font-weight: 500; letter-spacing: 1px;">CONFIRM PASSWORD</label>
+                                <input type="password" class="form-control" id="password2" name="password2" required style="border-radius: 0; padding: 12px;">
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">REGISTER</button>
                             </div>
                         </form>
                         <div class="text-center mt-4">
-                            <p>Already have an account? <a href="/login/" style="color: #8E1616; text-decoration: none;">Login here</a></p>
+                            <p style="font-size: 0.9rem; color: #666;">Already have an account? <a href="{% url 'login' %}" style="color: #8E1616; text-decoration: none;">Login here</a></p>
                         </div>
                     </div>
                 </div>

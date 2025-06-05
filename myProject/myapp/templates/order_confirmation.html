@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Order Confirmation - Roshanne Modeling Agency{% endblock %}
+
+{% block content %}
+<section class="d-flex align-items-center text-center text-white" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url({% static 'images/hero2.jpeg' %}) center/cover; height: 50vh;">
+    <div class="container">
+        <h1 style="font-size: 3.5rem; font-weight: 300; letter-spacing: 6px; margin-bottom: 1rem;">ORDER CONFIRMED</h1>
+        <div style="height: 1px; background-color: #FFFFFF; width: 80px; margin: 2rem auto;"></div>
+        <p class="lead" style="font-weight: 300; letter-spacing: 2px;">Thank you for your purchase</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-check-circle" style="font-size: 4rem; color: #8E1616;"></i>
+                        </div>
+                        <h2 class="text-center mb-4" style="font-weight: 300; letter-spacing: 2px;">Order #{{ order.order_number }}</h2>
+                        <p class="text-center mb-4" style="color: #666;">Your order has been placed successfully. We will process it shortly.</p>
+                        
+                        <div class="mb-4">
+                            <h4 style="font-weight: 300; letter-spacing: 1px; margin-bottom: 1rem;">Order Details</h4>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="font-weight: 500; letter-spacing: 1px;">ITEM</th>
+                                            <th style="font-weight: 500; letter-spacing: 1px;">QUANTITY</th>
+                                            <th style="font-weight: 500; letter-spacing: 1px;">PRICE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in order.items.all %}
+                                        <tr>
+                                            <td>{{ item.name }}</td>
+                                            <td>{{ item.quantity }}</td>
+                                            <td>${{ item.total_price }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="2" class="text-end" style="font-weight: 500;">Total:</td>
+                                            <td style="font-weight: 500;">${{ order.total_amount }}</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 style="font-weight: 300; letter-spacing: 1px; margin-bottom: 1rem;">Shipping Information</h4>
+                            <p style="margin-bottom: 0.5rem;"><strong>Name:</strong> {{ order.customer.user.get_full_name }}</p>
+                            <p style="margin-bottom: 0.5rem;"><strong>Email:</strong> {{ order.email }}</p>
+                            <p style="margin-bottom: 0.5rem;"><strong>Phone:</strong> {{ order.phone }}</p>
+                            <p style="margin-bottom: 0.5rem;"><strong>Address:</strong> {{ order.shipping_address }}</p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <a href="{% url 'home' %}" class="btn" style="background-color: #8E1616; color: white; padding: 12px 30px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Continue Shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

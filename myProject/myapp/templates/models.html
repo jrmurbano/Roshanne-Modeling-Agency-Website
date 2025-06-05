@@ -13,104 +13,62 @@
     </div>
 </section>
 
+<!-- Filter Section -->
+<section class="py-4" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h5 style="font-weight: 500; letter-spacing: 1px; margin-bottom: 0;">FILTER BY CATEGORY</h5>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex flex-wrap gap-2 justify-content-md-end">
+                    <a href="{% url 'models' %}" class="btn btn-sm {% if not current_category %}active{% endif %}" 
+                       style="{% if not current_category %}background-color: #8E1616; border: 1px solid #8E1616; color: white;{% else %}background-color: transparent; border: 1px solid #8E1616; color: #8E1616;{% endif %} padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; border-radius: 0;">
+                        ALL
+                    </a>
+                    {% for category in categories %}
+                    <a href="{% url 'models' %}?category={{ category.name }}" 
+                       class="btn btn-sm {% if current_category == category.name %}active{% endif %}"
+                       style="{% if current_category == category.name %}background-color: #8E1616; border: 1px solid #8E1616; color: white;{% else %}background-color: transparent; border: 1px solid #8E1616; color: #8E1616;{% endif %} padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; border-radius: 0;">
+                        {{ category.name|upper }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="py-5">
     <div class="container">
         <div class="row g-4">
-            <!-- Model 1 -->
+            {% for model in models %}
             <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/model_anok.avif' %}" alt="Elite Model" class="card-img-top" style="height: 450px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" 
+                     onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" 
+                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
+                    {% if model.user_profile.profile_image %}
+                    <img src="{{ model.user_profile.profile_image.url }}" alt="{{ model.user_profile.user.get_full_name }}" 
+                         class="card-img-top" style="height: 450px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    {% else %}
+                    <img src="{% static 'images/model_placeholder.jpg' %}" alt="{{ model.user_profile.user.get_full_name }}" 
+                         class="card-img-top" style="height: 450px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    {% endif %}
                     <div class="card-body text-center p-4">
-                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">ANOK YAI</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">High Fashion • Editorial</p>
-                        <p style="font-size: 0.8rem; color: #666; font-weight: 300;">5'10" • Size 2 • 34-24-34</p>
+                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">
+                            {{ model.user_profile.user.get_full_name|upper }}
+                        </h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">
+                            {{ model.category.name|upper }}
+                        </p>
+                        <p style="font-size: 0.8rem; color: #666; font-weight: 300;">
+                            {{ model.user_profile.height }}cm • {{ model.user_profile.measurements }}
+                        </p>
                     </div>
                 </div>
             </div>
-            
-            <!-- Model 2 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/model_bella.jpg' %}" alt="Elite Model" class="card-img-top" style="height: 450px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body text-center p-4">
-                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">BELLA HADID</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Runway • High Fashion</p>
-                        <p style="font-size: 0.8rem; color: #666; font-weight: 300;">5'9" • Size 0 • 32-23-35</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Model 3 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/model_kendall.webp' %}" alt="Elite Model" class="card-img-top" style="height: 450px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body text-center p-4">
-                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">KENDALL JENNER</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Commercial • Beauty</p>
-                        <p style="font-size: 0.8rem; color: #666; font-weight: 300;">5'11" • Size 2 • 34-25-36</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Model 4 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/model_imaan.jpg' %}" alt="Elite Model" class="card-img-top" style="height: 450px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body text-center p-4">
-                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">IMAAN HAMMAN</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Editorial • Campaign</p>
-                        <p style="font-size: 0.8rem; color: #666; font-weight: 300;">5'10" • Size 0 • 33-24-35</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Model 5 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/model_alex.jpg' %}" alt="Elite Model" class="card-img-top" style="height: 450px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body text-center p-4">
-                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">ALEX CONSANI</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">High Fashion • Editorial</p>
-                        <p style="font-size: 0.8rem; color: #666; font-weight: 300;">6'2" • Size 0 • 33-24-35</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Model 6 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/model_vittoria.jpg' %}" alt="Elite Model" class="card-img-top" style="height: 450px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body text-center p-4">
-                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">VITTORIA CERETTI</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Runways • Luxury</p>
-                        <p style="font-size: 0.8rem; color: #666; font-weight: 300;">5'10" • Size 0 • 32-24-33</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/model_zendaya.jpeg' %}" alt="Elite Model" class="card-img-top" style="height: 450px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body text-center p-4">
-                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">ZENDAYA COLEMAN</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">High Fashion • Luxury</p>
-                        <p style="font-size: 0.8rem; color: #666; font-weight: 300;">5'10" • Size 0 • 32-24-33</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/model_lisa.jpeg' %}" alt="Elite Model" class="card-img-top" style="height: 450px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body text-center p-4">
-                        <h5 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">LALISA MANOBAN</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Commercials • Luxury</p>
-                        <p style="font-size: 0.8rem; color: #666; font-weight: 300;">5'6" • Size 0 • 32-24-33</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>  
+            {% endfor %}
+        </div>
     </div>
 </section>
 {% endblock %}

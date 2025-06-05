@@ -48,25 +48,27 @@
                         <a class="nav-link {% if request.path == '/about/' %}active{% endif %}" href="/about/" style="color: {% if request.path == '/about/' %}#8E1616{% else %}#000000{% endif %} !important; font-weight: 500; font-size: 0.9rem; letter-spacing: 1px;">ABOUT</a>
                     </li>
                     {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logout/" style="color: #8E1616 !important; font-weight: 500; font-size: 0.9rem; letter-spacing: 1px;">LOGOUT</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.path == '/login/' %}active{% endif %}" href="/login/" style="color: {% if request.path == '/login/' %}#8E1616{% else %}#000000{% endif %} !important; font-weight: 500; font-size: 0.9rem; letter-spacing: 1px;">LOGIN</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {% if request.path == '/register/' %}active{% endif %}" href="/register/" style="color: {% if request.path == '/register/' %}#8E1616{% else %}#000000{% endif %} !important; font-weight: 500; font-size: 0.9rem; letter-spacing: 1px;">REGISTER</a>
-                        </li>
-                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">LOGOUT</a>
+                    </li>
                     <li class="nav-item ms-2">
-                        <a class="nav-link position-relative" href="#" style="color: #8E1616 !important;">
-                            <i class="fas fa-shopping-bag" style="font-size: 1.2rem;"></i>
+                        <a class="nav-link position-relative" href="{% url 'shopping_bag' %}">
+                            <i class="fas fa-shopping-bag" style="font-size: 1.2rem; color: #8E1616;"></i>
+                            {% if request.session.bag %}
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" style="background-color: #8E1616;">
-                                0
+                                {{ request.session.bag|length }}
                             </span>
+                            {% endif %}
                         </a>
                     </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">LOGIN</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">REGISTER</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

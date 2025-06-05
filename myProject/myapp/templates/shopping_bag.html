@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Shopping Bag - Roshanne Modeling Agency{% endblock %}
+
+{% block content %}
+<section class="d-flex align-items-center text-center text-white" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url({% static 'images/hero6.jpg' %}) center/cover; height: 50vh;">
+    <div class="container">
+        <h1 style="font-size: 3.5rem; font-weight: 300; letter-spacing: 6px; margin-bottom: 1rem;">SHOPPING BAG</h1>
+        <div style="height: 1px; background-color: #FFFFFF; width: 80px; margin: 2rem auto;"></div>
+        <p class="lead" style="font-weight: 300; letter-spacing: 2px;">Your selected items</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        {% if messages %}
+        <div class="messages mb-4">
+            {% for message in messages %}
+            <div class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if bag_items %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="font-weight: 500; letter-spacing: 1px;">ITEM</th>
+                        <th style="font-weight: 500; letter-spacing: 1px;">PRICE</th>
+                        <th style="font-weight: 500; letter-spacing: 1px;">QUANTITY</th>
+                        <th style="font-weight: 500; letter-spacing: 1px;">TOTAL</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in bag_items %}
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                {% if item.image %}
+                                <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width: 80px; height: 80px; object-fit: cover; margin-right: 1rem;">
+                                {% endif %}
+                                <div>
+                                    <h5 class="mb-0" style="font-weight: 500;">{{ item.name }}</h5>
+                                    {% if item.type == 'magazine' %}
+                                    <small class="text-muted">Magazine</small>
+                                    {% elif item.type == 'photoshoot' %}
+                                    <small class="text-muted">Photoshoot</small>
+                                    {% elif item.type == 'runway' %}
+                                    <small class="text-muted">Runway</small>
+                                    {% elif item.type == 'campaign' %}
+                                    <small class="text-muted">Campaign</small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </td>
+                        <td>${{ item.price }}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <form method="POST" action="{% url 'update_bag' item.id %}" class="d-flex align-items-center">
+                                    {% csrf_token %}
+                                    <button type="submit" name="action" value="decrease" class="btn btn-sm" style="background-color: #8E1616; color: white;">-</button>
+                                    <span class="mx-3">{{ item.quantity }}</span>
+                                    <button type="submit" name="action" value="increase" class="btn btn-sm" style="background-color: #8E1616; color: white;">+</button>
+                                </form>
+                            </div>
+                        </td>
+                        <td>${{ item.total_price }}</td>
+                        <td>
+                            <form method="POST" action="{% url 'remove_from_bag' item.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link text-danger p-0">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-end" style="font-weight: 500;">Total:</td>
+                        <td colspan="2" style="font-weight: 500;">${{ total }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{% url 'home' %}" class="btn" style="background-color: #8E1616; color: white; padding: 12px 30px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Continue Shopping</a>
+            <a href="{% url 'checkout' %}" class="btn" style="background-color: #8E1616; color: white; padding: 12px 30px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Proceed to Checkout</a>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <h3 class="mb-4" style="font-weight: 300; letter-spacing: 2px;">Your bag is empty</h3>
+            <p class="mb-4" style="color: #666;">Looks like you haven't added any items to your bag yet.</p>
+            <a href="{% url 'home' %}" class="btn" style="background-color: #8E1616; color: white; padding: 12px 30px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Start Shopping</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %} 

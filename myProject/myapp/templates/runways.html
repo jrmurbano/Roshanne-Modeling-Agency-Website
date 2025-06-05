@@ -25,6 +25,21 @@
                         <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">PARIS FASHION WEEK</h5>
                         <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Haute Couture • Spring/Summer 2024</p>
                         <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Our models graced the runways of prestigious designers during Paris Fashion Week, showcasing the latest haute couture collections.</p>
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">{{ runway.name }}</h5>
+                            <p class="card-text" style="color: #666;">{{ runway.description }}</p>
+                            <p class="card-text" style="font-weight: 500;">${{ runway.price }}</p>
+                            {% if user.is_authenticated %}
+                            <form method="POST" action="{% url 'add_to_bag' runway.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="type" value="runway">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
+                            </form>
+                            {% else %}
+                            <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -37,6 +52,21 @@
                         <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">MILAN FASHION WEEK</h5>
                         <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Ready-to-Wear • Fall/Winter 2024</p>
                         <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Stunning presentations for luxury Italian fashion houses, featuring our top models in sophisticated ready-to-wear collections.</p>
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">{{ runway.name }}</h5>
+                            <p class="card-text" style="color: #666;">{{ runway.description }}</p>
+                            <p class="card-text" style="font-weight: 500;">${{ runway.price }}</p>
+                            {% if user.is_authenticated %}
+                            <form method="POST" action="{% url 'add_to_bag' runway.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="type" value="runway">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
+                            </form>
+                            {% else %}
+                            <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,6 +79,21 @@
                         <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">NEW YORK FASHION WEEK</h5>
                         <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Contemporary • Resort 2024</p>
                         <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Contemporary fashion showcases featuring emerging and established designers in the heart of Manhattan.</p>
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">{{ runway.name }}</h5>
+                            <p class="card-text" style="color: #666;">{{ runway.description }}</p>
+                            <p class="card-text" style="font-weight: 500;">${{ runway.price }}</p>
+                            {% if user.is_authenticated %}
+                            <form method="POST" action="{% url 'add_to_bag' runway.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="type" value="runway">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
+                            </form>
+                            {% else %}
+                            <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,6 +106,21 @@
                         <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">LONDON FASHION WEEK</h5>
                         <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Avant-Garde • Spring/Summer 2024</p>
                         <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Innovative and avant-garde presentations showcasing cutting-edge British fashion and emerging talent.</p>
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">{{ runway.name }}</h5>
+                            <p class="card-text" style="color: #666;">{{ runway.description }}</p>
+                            <p class="card-text" style="font-weight: 500;">${{ runway.price }}</p>
+                            {% if user.is_authenticated %}
+                            <form method="POST" action="{% url 'add_to_bag' runway.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="type" value="runway">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
+                            </form>
+                            {% else %}
+                            <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -73,6 +133,15 @@
                         <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">LUXURY BRAND SHOWCASE</h5>
                         <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Exclusive • Private Collection</p>
                         <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Exclusive private runway shows for luxury brands, featuring bespoke collections and one-of-a-kind pieces.</p>
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">{{ runway.name }}</h5>
+                            <p class="card-text" style="color: #666;">{{ runway.description }}</p>
+                            <p class="card-text" style="font-weight: 500;">${{ runway.price }}</p>
+                            {% if user.is_authenticated %}
+                            <form method="POST" action="{% url 'add_to_bag' runway.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="type" value="runway">
+                                <input type="hidden" name="quantity" value="1">
                     </div>
                 </div>
             </div>
