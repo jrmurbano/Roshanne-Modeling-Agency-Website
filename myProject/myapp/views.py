@@ -166,34 +166,54 @@ def shopping_bag(request):
     bag = request.session.get('bag', {})
     bag_items = []
     total = Decimal('0.00')
+    items_to_remove = []
 
-    for item_id, item_data in bag.items():
+    for item_key, item_data in bag.items():
         item_type = item_data.get('type')
+        item_id = item_data.get('id')
         quantity = item_data.get('quantity', 1)
         
-        if item_type == 'magazine':
-            item = get_object_or_404(Magazine, id=item_id)
-        elif item_type == 'photoshoot':
-            item = get_object_or_404(Photoshoot, id=item_id)
-        elif item_type == 'runway':
-            item = get_object_or_404(Runway, id=item_id)
-        elif item_type == 'campaign':
-            item = get_object_or_404(Campaign, id=item_id)
-        else:
+        try:
+            if item_type == 'magazine':
+                item = get_object_or_404(Magazine, id=item_id)
+                image = item.cover_image
+            elif item_type == 'photoshoot':
+                item = get_object_or_404(Photoshoot, id=item_id)
+                image = item.image
+            elif item_type == 'runway':
+                item = get_object_or_404(Runway, id=item_id)
+                image = item.image
+            elif item_type == 'campaign':
+                item = get_object_or_404(Campaign, id=item_id)
+                image = item.image
+            else:
+                continue
+
+            item_total = item.price * quantity
+            total += item_total
+
+            bag_items.append({
+                'id': item_id,
+                'name': item.title,
+                'price': item.price,
+                'quantity': quantity,
+                'total_price': item_total,
+                'type': item_type,
+                'image': image
+            })
+        except:
+            # If item doesn't exist, mark it for removal
+            items_to_remove.append(item_key)
             continue
 
-        item_total = item.price * quantity
-        total += item_total
-
-        bag_items.append({
-            'id': item_id,
-            'name': item.title,
-            'price': item.price,
-            'quantity': quantity,
-            'total_price': item_total,
-            'type': item_type,
-            'image': item.cover_image if hasattr(item, 'cover_image') else None
-        })
+    # Remove any items that no longer exist
+    for item_key in items_to_remove:
+        del bag[item_key]
+    
+    # Update the session if any items were removed
+    if items_to_remove:
+        request.session['bag'] = bag
+        messages.warning(request, 'Some items in your bag are no longer available and have been removed.')
 
     context = {
         'bag_items': bag_items,
@@ -209,12 +229,16 @@ def add_to_bag(request, item_id):
     # Get the bag from session or create new one
     bag = request.session.get('bag', {})
     
+    # Create a composite key using item type and ID
+    item_key = f"{item_type}_{item_id}"
+    
     # Add or update item in bag
-    if item_id in bag:
-        bag[item_id]['quantity'] += quantity
+    if item_key in bag:
+        bag[item_key]['quantity'] += quantity
     else:
-        bag[item_id] = {
+        bag[item_key] = {
             'type': item_type,
+            'id': item_id,
             'quantity': quantity
         }
     
@@ -226,16 +250,21 @@ def add_to_bag(request, item_id):
 
 @login_required
 def update_bag(request, item_id):
-    action = request.POST.get('action')
+    quantity = int(request.POST.get('quantity', 1))
     bag = request.session.get('bag', {})
     
-    if item_id in bag:
-        if action == 'increase':
-            bag[item_id]['quantity'] += 1
-        elif action == 'decrease':
-            bag[item_id]['quantity'] -= 1
-            if bag[item_id]['quantity'] <= 0:
-                del bag[item_id]
+    # Find the item in the bag using the composite key
+    item_key = None
+    for key, value in bag.items():
+        if value.get('id') == item_id:
+            item_key = key
+            break
+    
+    if item_key and item_key in bag:
+        if quantity > 0:
+            bag[item_key]['quantity'] = quantity
+        else:
+            del bag[item_key]
     
     request.session['bag'] = bag
     return redirect('shopping_bag')
@@ -244,8 +273,15 @@ def update_bag(request, item_id):
 def remove_from_bag(request, item_id):
     bag = request.session.get('bag', {})
     
-    if item_id in bag:
-        del bag[item_id]
+    # Find the item in the bag using the composite key
+    item_key = None
+    for key, value in bag.items():
+        if value.get('id') == item_id:
+            item_key = key
+            break
+    
+    if item_key and item_key in bag:
+        del bag[item_key]
         request.session['bag'] = bag
         messages.success(request, 'Item removed from your bag!')
     
@@ -274,19 +310,27 @@ def checkout(request):
         customer.address = request.POST.get('shipping_address', '')
         customer.save()
 
+        # Update user information
+        user = request.user
+        user.first_name = request.POST.get('first_name', '')
+        user.last_name = request.POST.get('last_name', '')
+        user.email = request.POST.get('email', '')
+        user.save()
+
         # Create order
         order = Order.objects.create(
             customer=customer,
             total_amount=Decimal(request.POST.get('total_amount', 0)),
             shipping_address=request.POST.get('shipping_address', ''),
             phone=request.POST.get('phone', ''),
-            email=request.user.email,
+            email=request.POST.get('email', ''),
             notes=request.POST.get('notes', '')
         )
 
         # Create order items
-        for item_id, item_data in bag.items():
+        for item_key, item_data in bag.items():
             item_type = item_data.get('type')
+            item_id = item_data.get('id')
             quantity = item_data.get('quantity', 1)
 
             if item_type == 'magazine':
@@ -317,8 +361,9 @@ def checkout(request):
     # Calculate total
     total = Decimal('0.00')
     bag_items = []
-    for item_id, item_data in bag.items():
+    for item_key, item_data in bag.items():
         item_type = item_data.get('type')
+        item_id = item_data.get('id')
         quantity = item_data.get('quantity', 1)
 
         if item_type == 'magazine':
@@ -341,18 +386,20 @@ def checkout(request):
             'price': item.price,
             'quantity': quantity,
             'total_price': item_total,
-            'type': item_type,
-            'image': item.cover_image if hasattr(item, 'cover_image') else None
+            'type': item_type
         })
 
     context = {
-        'customer': customer,
         'bag_items': bag_items,
-        'total': total
+        'total': total,
+        'customer': customer
     }
     return render(request, 'checkout.html', context)
 
 @login_required
 def order_confirmation(request, order_number):
     order = get_object_or_404(Order, order_number=order_number, customer__user=request.user)
-    return render(request, 'order_confirmation.html', {'order': order})
+    context = {
+        'order': order
+    }
+    return render(request, 'order_confirmation.html', context)

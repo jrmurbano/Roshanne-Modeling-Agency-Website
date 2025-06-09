@@ -64,9 +64,7 @@
                             <div class="d-flex align-items-center">
                                 <form method="POST" action="{% url 'update_bag' item.id %}" class="d-flex align-items-center">
                                     {% csrf_token %}
-                                    <button type="submit" name="action" value="decrease" class="btn btn-sm" style="background-color: #8E1616; color: white;">-</button>
-                                    <span class="mx-3">{{ item.quantity }}</span>
-                                    <button type="submit" name="action" value="increase" class="btn btn-sm" style="background-color: #8E1616; color: white;">+</button>
+                                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control" style="width: 80px; border-radius: 0;" onchange="this.form.submit()">
                                 </form>
                             </div>
                         </td>

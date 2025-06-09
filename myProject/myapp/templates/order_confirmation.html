@@ -56,8 +56,8 @@
                         
                         <div class="mb-4">
                             <h4 style="font-weight: 300; letter-spacing: 1px; margin-bottom: 1rem;">Shipping Information</h4>
-                            <p style="margin-bottom: 0.5rem;"><strong>Name:</strong> {{ order.customer.user.get_full_name }}</p>
-                            <p style="margin-bottom: 0.5rem;"><strong>Email:</strong> {{ order.email }}</p>
+                            <p style="margin-bottom: 0.5rem;"><strong>Name:</strong> {{ order.customer.user.first_name }} {{ order.customer.user.last_name }}</p>
+                            <p style="margin-bottom: 0.5rem;"><strong>Email:</strong> {{ order.customer.user.email }}</p>
                             <p style="margin-bottom: 0.5rem;"><strong>Phone:</strong> {{ order.phone }}</p>
                             <p style="margin-bottom: 0.5rem;"><strong>Address:</strong> {{ order.shipping_address }}</p>
                         </div>

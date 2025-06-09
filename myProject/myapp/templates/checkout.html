@@ -32,19 +32,20 @@
                         <h3 class="mb-4" style="font-weight: 300; letter-spacing: 2px;">Shipping Information</h3>
                         <form method="POST" action="{% url 'checkout' %}">
                             {% csrf_token %}
+                            <input type="hidden" name="total_amount" value="{{ total }}">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="first_name" class="form-label" style="font-weight: 500; letter-spacing: 1px;">FIRST NAME</label>
-                                    <input type="text" class="form-control" id="first_name" name="first_name" value="{{ customer.user.first_name }}" required style="border-radius: 0; padding: 12px;">
+                                    <input type="text" class="form-control" id="first_name" name="first_name" value="{{ request.user.first_name }}" required style="border-radius: 0; padding: 12px;">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="last_name" class="form-label" style="font-weight: 500; letter-spacing: 1px;">LAST NAME</label>
-                                    <input type="text" class="form-control" id="last_name" name="last_name" value="{{ customer.user.last_name }}" required style="border-radius: 0; padding: 12px;">
+                                    <input type="text" class="form-control" id="last_name" name="last_name" value="{{ request.user.last_name }}" required style="border-radius: 0; padding: 12px;">
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label" style="font-weight: 500; letter-spacing: 1px;">EMAIL</label>
-                                <input type="email" class="form-control" id="email" name="email" value="{{ customer.user.email }}" required style="border-radius: 0; padding: 12px;">
+                                <input type="email" class="form-control" id="email" name="email" value="{{ request.user.email }}" required style="border-radius: 0; padding: 12px;">
                             </div>
                             <div class="mb-3">
                                 <label for="phone" class="form-label" style="font-weight: 500; letter-spacing: 1px;">PHONE</label>
