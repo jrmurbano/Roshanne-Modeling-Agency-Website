@@ -17,18 +17,30 @@
 <section class="py-5">
     <div class="container">
         <div class="row g-4">
-            <!-- Portfolio Item 1 -->
+            {% for photoshoot in photoshoots %}
             <div class="col-lg-4 col-md-6">
                 <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/camp_loreal.jpg' %}" alt="Vogue Editorial" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    {% if photoshoot.image %}
+                        <img src="{{ photoshoot.image.url }}" alt="{{ photoshoot.title }}" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    {% else %}
+                        <img src="{% static 'images/default-photoshoot.jpg' %}" alt="{{ photoshoot.title }}" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    {% endif %}
                     <div class="card-body p-4">
-                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">VOGUE EDITORIAL</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">High Fashion • Editorial</p>
-                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Exclusive editorial shoot featuring our top models for Vogue's spring collection showcase.</p>
+                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">{{ photoshoot.title|upper }}</h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">
+                            {% if photoshoot.category %}{{ photoshoot.category.name }} • {% endif %}
+                            {% if photoshoot.type %}{{ photoshoot.type|title }}{% endif %}
+                        </p>
+                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">{{ photoshoot.description }}</p>
                         <div class="card-body">
-                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">VOGUE EDITORIAL</h5>
-                            <p class="card-text" style="color: #666;">High Fashion • Editorial</p>
-                            <p class="card-text" style="font-weight: 500;">${{ photoshoot.price }}</p>
+                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">{{ photoshoot.title|upper }}</h5>
+                            <p class="card-text" style="color: #666;">
+                                {% if photoshoot.category %}{{ photoshoot.category.name }} • {% endif %}
+                                {% if photoshoot.type %}{{ photoshoot.type|title }}{% endif %}
+                            </p>
+                            {% if photoshoot.price %}
+                                <p class="card-text" style="font-weight: 500;">${{ photoshoot.price }}</p>
+                            {% endif %}
                             {% if user.is_authenticated %}
                             <form method="POST" action="{% url 'add_to_bag' photoshoot.id %}">
                                 {% csrf_token %}
@@ -43,123 +55,7 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Portfolio Item 2 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/camp_loreal.jpg' %}" alt="Beauty Campaign" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body p-4">
-                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">LUXURY BEAUTY</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Beauty • Commercial</p>
-                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Stunning beauty campaign for a prestigious cosmetics brand featuring natural elegance.</p>
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">LUXURY BEAUTY</h5>
-                            <p class="card-text" style="color: #666;">Beauty • Commercial</p>
-                            <p class="card-text" style="font-weight: 500;">${{ photoshoot.price }}</p>
-                            {% if user.is_authenticated %}
-                            <form method="POST" action="{% url 'add_to_bag' photoshoot.id %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="type" value="photoshoot">
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
-                            </form>
-                            {% else %}
-                            <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Portfolio Item 3 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/camp_loreal.jpg' %}" alt="Fashion Week" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body p-4">
-                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">FASHION WEEK BACKSTAGE</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Behind the Scenes • Editorial</p>
-                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Intimate behind-the-scenes moments captured during Paris Fashion Week preparations.</p>
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">FASHION WEEK BACKSTAGE</h5>
-                            <p class="card-text" style="color: #666;">Behind the Scenes • Editorial</p>
-                            <p class="card-text" style="font-weight: 500;">${{ photoshoot.price }}</p>
-                            {% if user.is_authenticated %}
-                            <form method="POST" action="{% url 'add_to_bag' photoshoot.id %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="type" value="photoshoot">
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
-                            </form>
-                            {% else %}
-                            <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Portfolio Item 4 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/camp_loreal.jpg' %}" alt="Luxury Brand" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body p-4">
-                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">LUXURY BRAND CAMPAIGN</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Luxury • Campaign</p>
-                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Sophisticated campaign for an international luxury fashion house showcasing timeless elegance.</p>
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">LUXURY BRAND CAMPAIGN</h5>
-                            <p class="card-text" style="color: #666;">Luxury • Campaign</p>
-                            <p class="card-text" style="font-weight: 500;">${{ photoshoot.price }}</p>
-                            {% if user.is_authenticated %}
-                            <form method="POST" action="{% url 'add_to_bag' photoshoot.id %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="type" value="photoshoot">
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
-                            </form>
-                            {% else %}
-                            <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Portfolio Item 5 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/camp_loreal.jpg' %}" alt="Portrait Series" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body p-4">
-                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">PORTRAIT SERIES</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Portrait • Fine Art</p>
-                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Artistic portrait series exploring the intersection of fashion and contemporary art.</p>
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">PORTRAIT SERIES</h5>
-                            <p class="card-text" style="color: #666;">Portrait • Fine Art</p>
-                            <p class="card-text" style="font-weight: 500;">${{ photoshoot.price }}</p>
-                            {% if user.is_authenticated %}
-                            <form method="POST" action="{% url 'add_to_bag' photoshoot.id %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="type" value="photoshoot">
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
-                            </form>
-                            {% else %}
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Portfolio Item 6 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/camp_loreal.jpg' %}" alt="Magazine Cover" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body p-4">
-                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">MAGAZINE COVER</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Editorial • Cover</p>
-                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Iconic magazine cover shoot featuring bold fashion statements and striking compositions.</p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>

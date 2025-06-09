@@ -271,14 +271,14 @@ def checkout(request):
     if request.method == 'POST':
         # Update customer information
         customer.phone = request.POST.get('phone', '')
-        customer.address = request.POST.get('address', '')
+        customer.address = request.POST.get('shipping_address', '')
         customer.save()
 
         # Create order
         order = Order.objects.create(
             customer=customer,
             total_amount=Decimal(request.POST.get('total_amount', 0)),
-            shipping_address=request.POST.get('address', ''),
+            shipping_address=request.POST.get('shipping_address', ''),
             phone=request.POST.get('phone', ''),
             email=request.user.email,
             notes=request.POST.get('notes', '')

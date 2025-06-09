@@ -1,3 +1,8 @@
+import os
+from django.core.files.base import File
+from django.conf import settings
+from .models import Magazine, MagazineCategory
+
 def create_magazines():
     magazines = [
         {
@@ -5,7 +10,7 @@ def create_magazines():
             'name': 'Vogue Magazine',
             'description': 'The world\'s most influential fashion magazine featuring our top models.',
             'price': 15.99,
-            'image': 'magazines/mag_anok.jpg',
+            'image': 'mag_anok.jpg',
             'category': 'Fashion'
         },
         {
@@ -13,7 +18,7 @@ def create_magazines():
             'name': 'Elle Magazine',
             'description': 'International fashion magazine showcasing our latest fashion campaigns.',
             'price': 12.99,
-            'image': 'magazines/mag_bella.jpg',
+            'image': 'mag_bella.jpg',
             'category': 'Fashion'
         },
         {
@@ -21,7 +26,7 @@ def create_magazines():
             'name': 'Harper\'s Bazaar',
             'description': 'American fashion magazine featuring exclusive photoshoots.',
             'price': 14.99,
-            'image': 'magazines/mag_brazilianmodel.jpg',
+            'image': 'mag_brazilianmodel.jpg',
             'category': 'Fashion'
         },
         {
@@ -29,7 +34,7 @@ def create_magazines():
             'name': 'GQ Magazine',
             'description': 'Men\'s fashion and lifestyle magazine with our male models.',
             'price': 13.99,
-            'image': 'magazines/mag_jen.jpeg',
+            'image': 'mag_jen.jpeg',
             'category': 'Fashion'
         },
         {
@@ -37,7 +42,7 @@ def create_magazines():
             'name': 'Cosmopolitan',
             'description': 'Women\'s fashion and lifestyle magazine featuring our female models.',
             'price': 11.99,
-            'image': 'magazines/mag_jnk.jpeg',
+            'image': 'mag_jnk.jpeg',
             'category': 'Fashion'
         },
         {
@@ -45,7 +50,7 @@ def create_magazines():
             'name': 'Vogue Italia',
             'description': 'Italian edition of Vogue featuring high fashion editorials.',
             'price': 16.99,
-            'image': 'magazines/mag_ken.jpg',
+            'image': 'mag_ken.jpg',
             'category': 'Fashion'
         },
         {
@@ -53,7 +58,7 @@ def create_magazines():
             'name': 'Vogue Paris',
             'description': 'French edition of Vogue with exclusive fashion spreads.',
             'price': 17.99,
-            'image': 'magazines/mag_lisa.jpeg',
+            'image': 'mag_lisa.jpeg',
             'category': 'Fashion'
         },
         {
@@ -61,18 +66,24 @@ def create_magazines():
             'name': 'Vogue US',
             'description': 'American edition of Vogue featuring our top models.',
             'price': 15.99,
-            'image': 'magazines/mag_z.jpg',
+            'image': 'mag_z.jpg',
             'category': 'Fashion'
         }
     ]
 
     for magazine_data in magazines:
         category = MagazineCategory.objects.get(name=magazine_data['category'])
-        Magazine.objects.create(
+        magazine = Magazine.objects.create(
             title=magazine_data['title'],
             name=magazine_data['name'],
             description=magazine_data['description'],
             price=magazine_data['price'],
-            image=magazine_data['image'],
             category=category
-        ) 
+        )
+        
+        # Add cover image
+        image_path = os.path.join(settings.BASE_DIR, 'myapp', 'static', 'images', magazine_data['image'])
+        if os.path.exists(image_path):
+            with open(image_path, 'rb') as f:
+                # Save with a unique name in the magazine_covers directory
+                magazine.cover_image.save(f"magazine_covers/{magazine_data['title'].lower().replace(' ', '_')}.jpg", File(f), save=True) 

@@ -17,18 +17,30 @@
 <section class="py-5">
     <div class="container">
         <div class="row g-4">
-            <!-- Runway Show 1 -->
+            {% for runway in runways %}
             <div class="col-lg-4 col-md-6">
                 <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/camp_loreal.jpg' %}" alt="Paris Fashion Week" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    {% if runway.image %}
+                        <img src="{{ runway.image.url }}" alt="{{ runway.title }}" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    {% else %}
+                        <img src="{% static 'images/default-runway.jpg' %}" alt="{{ runway.title }}" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
+                    {% endif %}
                     <div class="card-body p-4">
-                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">PARIS FASHION WEEK</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Haute Couture • Spring/Summer 2024</p>
-                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Our models graced the runways of prestigious designers during Paris Fashion Week, showcasing the latest haute couture collections.</p>
+                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">{{ runway.title|upper }}</h5>
+                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">
+                            {% if runway.category %}{{ runway.category.name }} • {% endif %}
+                            {% if runway.type %}{{ runway.type|title }}{% endif %}
+                        </p>
+                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">{{ runway.description }}</p>
                         <div class="card-body">
-                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">{{ runway.name }}</h5>
-                            <p class="card-text" style="color: #666;">{{ runway.description }}</p>
-                            <p class="card-text" style="font-weight: 500;">${{ runway.price }}</p>
+                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">{{ runway.title|upper }}</h5>
+                            <p class="card-text" style="color: #666;">
+                                {% if runway.category %}{{ runway.category.name }} • {% endif %}
+                                {% if runway.type %}{{ runway.type|title }}{% endif %}
+                            </p>
+                            {% if runway.price %}
+                                <p class="card-text" style="font-weight: 500;">${{ runway.price }}</p>
+                            {% endif %}
                             {% if user.is_authenticated %}
                             <form method="POST" action="{% url 'add_to_bag' runway.id %}">
                                 {% csrf_token %}
@@ -43,120 +55,7 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Runway Show 2 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/camp_loreal.jpg' %}" alt="Milan Fashion Week" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body p-4">
-                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">MILAN FASHION WEEK</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Ready-to-Wear • Fall/Winter 2024</p>
-                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Stunning presentations for luxury Italian fashion houses, featuring our top models in sophisticated ready-to-wear collections.</p>
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">{{ runway.name }}</h5>
-                            <p class="card-text" style="color: #666;">{{ runway.description }}</p>
-                            <p class="card-text" style="font-weight: 500;">${{ runway.price }}</p>
-                            {% if user.is_authenticated %}
-                            <form method="POST" action="{% url 'add_to_bag' runway.id %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="type" value="runway">
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
-                            </form>
-                            {% else %}
-                            <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Runway Show 3 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/camp_loreal.jpg' %}" alt="New York Fashion Week" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body p-4">
-                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">NEW YORK FASHION WEEK</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Contemporary • Resort 2024</p>
-                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Contemporary fashion showcases featuring emerging and established designers in the heart of Manhattan.</p>
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">{{ runway.name }}</h5>
-                            <p class="card-text" style="color: #666;">{{ runway.description }}</p>
-                            <p class="card-text" style="font-weight: 500;">${{ runway.price }}</p>
-                            {% if user.is_authenticated %}
-                            <form method="POST" action="{% url 'add_to_bag' runway.id %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="type" value="runway">
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
-                            </form>
-                            {% else %}
-                            <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Runway Show 4 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/camp_loreal.jpg' %}" alt="London Fashion Week" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body p-4">
-                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">LONDON FASHION WEEK</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Avant-Garde • Spring/Summer 2024</p>
-                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Innovative and avant-garde presentations showcasing cutting-edge British fashion and emerging talent.</p>
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">{{ runway.name }}</h5>
-                            <p class="card-text" style="color: #666;">{{ runway.description }}</p>
-                            <p class="card-text" style="font-weight: 500;">${{ runway.price }}</p>
-                            {% if user.is_authenticated %}
-                            <form method="POST" action="{% url 'add_to_bag' runway.id %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="type" value="runway">
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
-                            </form>
-                            {% else %}
-                            <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Runway Show 5 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/camp_loreal.jpg' %}" alt="Luxury Brand Show" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body p-4">
-                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">LUXURY BRAND SHOWCASE</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Exclusive • Private Collection</p>
-                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Exclusive private runway shows for luxury brands, featuring bespoke collections and one-of-a-kind pieces.</p>
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">{{ runway.name }}</h5>
-                            <p class="card-text" style="color: #666;">{{ runway.description }}</p>
-                            <p class="card-text" style="font-weight: 500;">${{ runway.price }}</p>
-                            {% if user.is_authenticated %}
-                            <form method="POST" action="{% url 'add_to_bag' runway.id %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="type" value="runway">
-                                <input type="hidden" name="quantity" value="1">
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Runway Show 6 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card border h-100 mb-4" style="border-color: #e0e0e0; border-radius: 0; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'; this.style.borderColor='#8E1616'; this.querySelector('img').style.filter='grayscale(0%)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='#e0e0e0'; this.querySelector('img').style.filter='grayscale(100%)';">
-                    <img src="{% static 'images/camp_loreal.jpg' %}" alt="Bridal Fashion Week" class="card-img-top" style="height: 350px; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s ease;">
-                    <div class="card-body p-4">
-                        <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">BRIDAL FASHION WEEK</h5>
-                        <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">Bridal • Couture 2024</p>
-                        <p style="font-size: 0.9rem; color: #666; font-weight: 300;">Elegant bridal couture presentations featuring the most exquisite wedding gowns and formal wear collections.</p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>

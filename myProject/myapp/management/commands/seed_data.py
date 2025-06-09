@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
     def get_static_image_path(self, image_name):
         """Get the full path to a static image file"""
-        return os.path.join(settings.STATIC_ROOT, 'images', image_name)
+        return os.path.join(settings.STATICFILES_DIRS[0], 'images', image_name)
 
     def create_superuser(self):
         if not User.objects.filter(username='admin').exists():
@@ -157,7 +157,6 @@ class Command(BaseCommand):
                 'category': 'Fashion',
                 'description': 'Featuring Kendall Jenner on the cover with exclusive fashion editorials.',
                 'price': 25.00,
-                'publication_date': '2023-06-01',
                 'image': 'mag_ken.jpg'
             },
             {
@@ -165,7 +164,6 @@ class Command(BaseCommand):
                 'category': 'Fashion',
                 'description': 'Featuring Marina Ruy Barbosa with luxury trends.',
                 'price': 22.00,
-                'publication_date': '2024-05-01',
                 'image': 'mag_brazilianmodel.jpg'
             },
             {
@@ -173,15 +171,13 @@ class Command(BaseCommand):
                 'category': 'Lifestyle',
                 'description': 'Featuring Lisa Manoban with lifestyle and fashion trends.',
                 'price': 20.00,
-                'publication_date': '2024-10-01',
                 'image': 'mag_lisa.jpeg'
             },
             {
-                'title': 'HARPER\'S BAZAAR',
+                'title': "HARPER'S BAZAAR",
                 'category': 'Fashion',
                 'description': 'Featuring Jennie Kim with high fashion editorials and trends.',
                 'price': 23.00,
-                'publication_date': '2023-10-01',
                 'image': 'mag_jnk.jpeg'
             }
         ]
@@ -193,8 +189,7 @@ class Command(BaseCommand):
                 defaults={
                     'category': category,
                     'description': magazine_data['description'],
-                    'price': magazine_data['price'],
-                    'publication_date': magazine_data['publication_date']
+                    'price': magazine_data['price']
                 }
             )
             
@@ -240,22 +235,44 @@ class Command(BaseCommand):
                 'description': 'Spring/Summer collection showcase',
                 'date': timezone.now() + timedelta(days=45),
                 'location': 'Paris, France',
-                'designer': 'Chanel'
+                'designer': 'Chanel',
+                'price': 1500.00,
+                'type': 'haute_couture',
+                'image': 'mag_ken.jpg'
             },
             {
                 'title': 'New York Fashion Week 2024',
                 'description': 'Fall/Winter collection showcase',
                 'date': timezone.now() + timedelta(days=90),
                 'location': 'New York, NY',
-                'designer': 'Tom Ford'
+                'designer': 'Tom Ford',
+                'price': 1200.00,
+                'type': 'ready_to_wear',
+                'image': 'mag_brazilianmodel.jpg'
             }
         ]
         
         for runway_data in runways_data:
-            Runway.objects.get_or_create(
+            category = MagazineCategory.objects.get(name='Fashion')
+            runway, created = Runway.objects.get_or_create(
                 title=runway_data['title'],
-                defaults=runway_data
+                defaults={
+                    'description': runway_data['description'],
+                    'date': runway_data['date'],
+                    'location': runway_data['location'],
+                    'designer': runway_data['designer'],
+                    'price': runway_data['price'],
+                    'type': runway_data['type'],
+                    'category': category
+                }
             )
+            
+            # Add runway image
+            if created:
+                image_path = self.get_static_image_path(runway_data['image'])
+                if os.path.exists(image_path):
+                    with open(image_path, 'rb') as f:
+                        runway.image.save(runway_data['image'], File(f), save=True)
         
         self.stdout.write(self.style.SUCCESS('Runways created successfully'))
 

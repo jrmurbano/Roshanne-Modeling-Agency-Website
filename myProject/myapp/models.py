@@ -116,7 +116,7 @@ class Magazine(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    cover_image = models.ImageField(upload_to='magazines/', null=True, blank=True)
+    cover_image = models.ImageField(upload_to='magazine_covers/', null=True, blank=True)
     category = models.ForeignKey(MagazineCategory, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -163,11 +163,23 @@ class MagazineOrder(models.Model):
         return f"Order #{self.id} - {self.magazine.title}"
 
 class Photoshoot(models.Model):
+    TYPE_CHOICES = [
+        ('editorial', 'Editorial'),
+        ('commercial', 'Commercial'),
+        ('portrait', 'Portrait'),
+        ('fashion', 'Fashion'),
+        ('beauty', 'Beauty'),
+    ]
+    
     title = models.CharField(max_length=200)
     description = models.TextField()
     date = models.DateTimeField()
     location = models.CharField(max_length=200)
     photographer = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='photoshoots/', null=True, blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    category = models.ForeignKey(MagazineCategory, on_delete=models.SET_NULL, null=True, blank=True)
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -175,11 +187,23 @@ class Photoshoot(models.Model):
         return self.title
 
 class Runway(models.Model):
+    TYPE_CHOICES = [
+        ('haute_couture', 'Haute Couture'),
+        ('ready_to_wear', 'Ready-to-Wear'),
+        ('resort', 'Resort'),
+        ('bridal', 'Bridal'),
+        ('menswear', 'Menswear'),
+    ]
+    
     title = models.CharField(max_length=200)
     description = models.TextField()
     date = models.DateTimeField()
     location = models.CharField(max_length=200)
     designer = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='runways/', null=True, blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    category = models.ForeignKey(MagazineCategory, on_delete=models.SET_NULL, null=True, blank=True)
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -192,6 +216,8 @@ class Campaign(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     client = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='campaigns/', null=True, blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
