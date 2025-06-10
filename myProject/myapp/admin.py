@@ -1,21 +1,9 @@
 from django.contrib import admin
 from .models import (
-    Category, Post, UserProfile, ModelCategory, Model, 
-    ModelBooking, MagazineCategory, Magazine, MagazineOrder,
-    Photoshoot, Runway, Campaign, Customer
+    UserProfile, ModelCategory, Model, 
+    ModelBooking, MagazineCategory, Magazine,
+    Photoshoot, Runway, Campaign, Customer, Order, OrderItem
 )
-
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'created_at')
-    search_fields = ('name',)
-
-@admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'category', 'status', 'created_at')
-    list_filter = ('status', 'category', 'created_at')
-    search_fields = ('title', 'content')
-    prepopulated_fields = {'slug': ('title',)}
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
@@ -51,12 +39,6 @@ class MagazineAdmin(admin.ModelAdmin):
     list_filter = ('category', 'created_at')
     ordering = ('-created_at',)
 
-@admin.register(MagazineOrder)
-class MagazineOrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'magazine', 'customer', 'quantity', 'total_price', 'status', 'order_date')
-    list_filter = ('status', 'order_date')
-    search_fields = ('magazine__title', 'customer__user__username', 'customer_name', 'customer_email')
-
 @admin.register(Photoshoot)
 class PhotoshootAdmin(admin.ModelAdmin):
     list_display = ('title', 'date', 'location', 'photographer')
@@ -79,5 +61,20 @@ class CampaignAdmin(admin.ModelAdmin):
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('user', 'phone', 'created_at')
     search_fields = ('user__username', 'user__email', 'phone')
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('order_number', 'customer', 'total_amount', 'status', 'order_date')
+    list_filter = ('status', 'order_date')
+    search_fields = ('order_number', 'customer__user__username', 'customer__user__email')
+    readonly_fields = ('order_number', 'created_at', 'updated_at')
+    ordering = ('-order_date',)
+
+@admin.register(OrderItem)
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ('order', 'name', 'price', 'quantity', 'total_price')
+    list_filter = ('item_type',)
+    search_fields = ('order__order_number', 'name')
+    readonly_fields = ('created_at',)
 
 

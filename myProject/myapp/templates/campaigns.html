@@ -29,18 +29,10 @@
                         <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">{{ campaign.title|upper }}</h5>
                         <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">{{ campaign.client }}</p>
                         <p style="font-size: 0.9rem; color: #666; font-weight: 300;">{{ campaign.description }}</p>
-                        {% if campaign.price %}
-                            <p class="card-text" style="font-weight: 500;">${{ campaign.price }}</p>
-                        {% endif %}
                         {% if user.is_authenticated %}
-                        <form method="POST" action="{% url 'add_to_bag' campaign.id %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="type" value="campaign">
-                            <input type="hidden" name="quantity" value="1">
-                            <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
-                        </form>
+                        <a href="#" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">View Details</a>
                         {% else %}
-                        <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
+                        <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to View</a>
                         {% endif %}
                     </div>
                 </div>

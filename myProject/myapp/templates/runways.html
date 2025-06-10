@@ -38,18 +38,10 @@
                                 {% if runway.category %}{{ runway.category.name }} • {% endif %}
                                 {% if runway.type %}{{ runway.type|title }}{% endif %}
                             </p>
-                            {% if runway.price %}
-                                <p class="card-text" style="font-weight: 500;">${{ runway.price }}</p>
-                            {% endif %}
                             {% if user.is_authenticated %}
-                            <form method="POST" action="{% url 'add_to_bag' runway.id %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="type" value="runway">
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Add to Bag</button>
-                            </form>
+                            <a href="#" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">View Details</a>
                             {% else %}
-                            <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to Purchase</a>
+                            <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to View</a>
                             {% endif %}
                         </div>
                     </div>

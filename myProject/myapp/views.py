@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.utils import timezone
-from .models import Model, Magazine, Photoshoot, Runway, Campaign, ModelCategory, MagazineCategory, Customer, MagazineOrder, Order, OrderItem
+from .models import Model, Magazine, Photoshoot, Runway, Campaign, ModelCategory, MagazineCategory, Customer, Order, OrderItem
 from django.contrib.auth.decorators import login_required
 from decimal import Decimal
 
@@ -172,48 +172,38 @@ def shopping_bag(request):
         item_type = item_data.get('type')
         item_id = item_data.get('id')
         quantity = item_data.get('quantity', 1)
-        
-        try:
-            if item_type == 'magazine':
-                item = get_object_or_404(Magazine, id=item_id)
-                image = item.cover_image
-            elif item_type == 'photoshoot':
-                item = get_object_or_404(Photoshoot, id=item_id)
-                image = item.image
-            elif item_type == 'runway':
-                item = get_object_or_404(Runway, id=item_id)
-                image = item.image
-            elif item_type == 'campaign':
-                item = get_object_or_404(Campaign, id=item_id)
-                image = item.image
-            else:
+
+        # Only process magazines
+        if item_type == 'magazine':
+            try:
+                item = Magazine.objects.get(id=item_id)
+                item_total = item.price * quantity
+                total += item_total
+
+                bag_items.append({
+                    'id': item_id,
+                    'name': item.title,
+                    'price': item.price,
+                    'quantity': quantity,
+                    'total_price': item_total,
+                    'type': item_type
+                })
+            except Magazine.DoesNotExist:
+                items_to_remove.append(item_key)
                 continue
-
-            item_total = item.price * quantity
-            total += item_total
-
-            bag_items.append({
-                'id': item_id,
-                'name': item.title,
-                'price': item.price,
-                'quantity': quantity,
-                'total_price': item_total,
-                'type': item_type,
-                'image': image
-            })
-        except:
-            # If item doesn't exist, mark it for removal
+        else:
+            # Remove non-magazine items
             items_to_remove.append(item_key)
             continue
 
-    # Remove any items that no longer exist
+    # Remove any items that no longer exist or are not magazines
     for item_key in items_to_remove:
         del bag[item_key]
     
     # Update the session if any items were removed
     if items_to_remove:
         request.session['bag'] = bag
-        messages.warning(request, 'Some items in your bag are no longer available and have been removed.')
+        messages.warning(request, 'Only magazines can be added to the bag. Other items have been removed.')
 
     context = {
         'bag_items': bag_items,
@@ -224,6 +214,12 @@ def shopping_bag(request):
 @login_required
 def add_to_bag(request, item_id):
     item_type = request.POST.get('type')
+    
+    # Only allow magazines to be added to bag
+    if item_type != 'magazine':
+        messages.error(request, 'Only magazines can be added to the bag!')
+        return redirect('magazines')
+    
     quantity = int(request.POST.get('quantity', 1))
     
     # Get the bag from session or create new one
@@ -244,7 +240,7 @@ def add_to_bag(request, item_id):
     
     # Save bag back to session
     request.session['bag'] = bag
-    messages.success(request, 'Item added to your bag!')
+    messages.success(request, 'Magazine added to your bag!')
     
     return redirect('shopping_bag')
 
@@ -327,7 +323,7 @@ def checkout(request):
             notes=request.POST.get('notes', '')
         )
 
-        # Create order items
+        # Create order items (only magazines)
         for item_key, item_data in bag.items():
             item_type = item_data.get('type')
             item_id = item_data.get('id')
@@ -335,23 +331,14 @@ def checkout(request):
 
             if item_type == 'magazine':
                 item = get_object_or_404(Magazine, id=item_id)
-            elif item_type == 'photoshoot':
-                item = get_object_or_404(Photoshoot, id=item_id)
-            elif item_type == 'runway':
-                item = get_object_or_404(Runway, id=item_id)
-            elif item_type == 'campaign':
-                item = get_object_or_404(Campaign, id=item_id)
-            else:
-                continue
-
-            OrderItem.objects.create(
-                order=order,
-                item_type=item_type,
-                item_id=item.id,
-                name=item.title,
-                price=item.price,
-                quantity=quantity
-            )
+                OrderItem.objects.create(
+                    order=order,
+                    item_type=item_type,
+                    item_id=item.id,
+                    name=item.title,
+                    price=item.price,
+                    quantity=quantity
+                )
 
         # Clear the bag
         request.session['bag'] = {}
@@ -368,26 +355,17 @@ def checkout(request):
 
         if item_type == 'magazine':
             item = get_object_or_404(Magazine, id=item_id)
-        elif item_type == 'photoshoot':
-            item = get_object_or_404(Photoshoot, id=item_id)
-        elif item_type == 'runway':
-            item = get_object_or_404(Runway, id=item_id)
-        elif item_type == 'campaign':
-            item = get_object_or_404(Campaign, id=item_id)
-        else:
-            continue
+            item_total = item.price * quantity
+            total += item_total
 
-        item_total = item.price * quantity
-        total += item_total
-
-        bag_items.append({
-            'id': item_id,
-            'name': item.title,
-            'price': item.price,
-            'quantity': quantity,
-            'total_price': item_total,
-            'type': item_type
-        })
+            bag_items.append({
+                'id': item_id,
+                'name': item.title,
+                'price': item.price,
+                'quantity': quantity,
+                'total_price': item_total,
+                'type': item_type
+            })
 
     context = {
         'bag_items': bag_items,
