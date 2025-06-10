@@ -1,0 +1,22 @@
+{
+    "files.associations": {
+        "*.html": "html"
+    },
+    "html.validate.scripts": false,
+    "html.validate.styles": false,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true
+    },
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/**": true,
+        "**/bower_components/**": true
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.html-language-features"
+}
