@@ -29,11 +29,6 @@
                         <h5 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">{{ campaign.title|upper }}</h5>
                         <p style="color: #8E1616; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem;">{{ campaign.client }}</p>
                         <p style="font-size: 0.9rem; color: #666; font-weight: 300;">{{ campaign.description }}</p>
-                        {% if user.is_authenticated %}
-                        <a href="#" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">View Details</a>
-                        {% else %}
-                        <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to View</a>
-                        {% endif %}
                     </div>
                 </div>
             </div>

@@ -32,18 +32,6 @@
                             {% if runway.type %}{{ runway.type|title }}{% endif %}
                         </p>
                         <p style="font-size: 0.9rem; color: #666; font-weight: 300;">{{ runway.description }}</p>
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-weight: 300; letter-spacing: 2px;">{{ runway.title|upper }}</h5>
-                            <p class="card-text" style="color: #666;">
-                                {% if runway.category %}{{ runway.category.name }} • {% endif %}
-                                {% if runway.type %}{{ runway.type|title }}{% endif %}
-                            </p>
-                            {% if user.is_authenticated %}
-                            <a href="#" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">View Details</a>
-                            {% else %}
-                            <a href="{% url 'login' %}" class="btn" style="background-color: #8E1616; color: white; padding: 8px 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; border-radius: 0;">Login to View</a>
-                            {% endif %}
-                        </div>
                     </div>
                 </div>
             </div>
